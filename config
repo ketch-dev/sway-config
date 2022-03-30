@@ -218,19 +218,12 @@ include /etc/sway/config.d/*
 
 # volume keybindings
 bindsym --to-code XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym --to-code XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym --to-code XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym --to-code XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +4%
+bindsym --to-code XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -4%
 
 # brightness keybindings
 bindsym --to-code XF86MonBrightnessUp exec "brightnessctl s 10%+"
 bindsym --to-code XF86MonBrightnessDown exec "brightnessctl s 10%-"
-
-
-# change keyboard language shortcut
-
-# swap l_ctrl and l_alt
-# input type:keyboard {
-# }
 
 # enable tap to click on touchpad
 input type:touchpad {
@@ -242,11 +235,21 @@ input type:touchpad {
 # lockscreen
 bindsym --to-code $mod+ctrl+l exec swaylock -c 004500
 
+#set bar
 bar swaybar_command waybar
 
+#border
 default_border pixel 2
 
+#set switch keyboard layout shortcut and swap l_alt with l_ctrl
 input type:keyboard {
   xkb_layout us,ru
   xkb_options "ctrl:swap_lalt_lctl,grp:win_space_toggle"
 }
+
+# autoexec
+exec_always nm-applet --indicator
+exec_always birdtray
+
+#make new window indicator invisible
+client.focused #4c7899 #285577 #ffffff #285577 #285577
