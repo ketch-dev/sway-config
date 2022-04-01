@@ -19,6 +19,8 @@ set $term alacritty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu wofi --show=drun
+# Set laptop output name
+set $laptop eDP-1
 
 ### Output configuration
 #
@@ -91,22 +93,12 @@ output * bg /usr/share/backgrounds/sway/forest-1.jpg fill
     bindsym --to-code $mod+$down focus down
     bindsym --to-code $mod+$up focus up
     bindsym --to-code $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym --to-code $mod+Left focus left
-    bindsym --to-code $mod+Down focus down
-    bindsym --to-code $mod+Up focus up
-    bindsym --to-code $mod+Right focus right
 
     # Move the focused window with the same, but add Shift
     bindsym --to-code $mod+Shift+$left move left
     bindsym --to-code $mod+Shift+$down move down
     bindsym --to-code $mod+Shift+$up move up
     bindsym --to-code $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym --to-code $mod+Shift+Left move left
-    bindsym --to-code $mod+Shift+Down move down
-    bindsym --to-code $mod+Shift+Up move up
-    bindsym --to-code $mod+Shift+Right move right
 #
 # Workspaces:
 #
@@ -233,7 +225,7 @@ input type:touchpad {
 }
 
 # lockscreen
-bindsym --to-code $mod+ctrl+l exec swaylock -c 004500
+bindsym --to-code $mod+ctrl+l exec swaylock --image "~/Downloads/lockscreenv2.jpg"
 
 #set bar
 bar swaybar_command waybar
@@ -253,3 +245,15 @@ exec_always birdtray
 
 #make new window indicator invisible
 client.focused #4c7899 #285577 #ffffff #285577 #285577
+
+# Set displays modes
+output HDMI-A-1 mode 1920x1080@70Hz position 0,0
+output $laptop resolution 1920x1080 position 1920,0
+
+# Disable laptop's display while it's lid is closed
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
+
+# Set shortcuts to move workspaces around
+bindsym --to-code $mod+Shift+Left move workspace to output HDMI-A-1
+bindsym --to-code $mod+Shift+Right move workspace to output $laptop
