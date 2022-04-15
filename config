@@ -108,7 +108,7 @@ output * bg /usr/share/backgrounds/sway/forest-1.jpg fill
     bindsym --to-code $mod+d workspace number 3
     bindsym --to-code $mod+f workspace number 4
     bindsym --to-code $mod+g workspace number 5
-    bindsym --to-code $mod+6 workspace number 6
+    bindsym --to-code $mod+z workspace number 6
     bindsym --to-code $mod+7 workspace number 7
     bindsym --to-code $mod+8 workspace number 8
     bindsym --to-code $mod+9 workspace number 9
@@ -119,7 +119,7 @@ output * bg /usr/share/backgrounds/sway/forest-1.jpg fill
     bindsym --to-code $mod+Shift+d move container to workspace number 3
     bindsym --to-code $mod+Shift+f move container to workspace number 4
     bindsym --to-code $mod+Shift+g move container to workspace number 5
-    bindsym --to-code $mod+Shift+6 move container to workspace number 6
+    bindsym --to-code $mod+Shift+z move container to workspace number 6
     bindsym --to-code $mod+Shift+7 move container to workspace number 7
     bindsym --to-code $mod+Shift+8 move container to workspace number 8
     bindsym --to-code $mod+Shift+9 move container to workspace number 9
@@ -247,7 +247,7 @@ exec_always birdtray
 client.focused #4c7899 #285577 #ffffff #285577 #285577
 
 # Set displays modes
-output HDMI-A-1 mode 1920x1080@70Hz position 0,0
+output HDMI-A-1 mode --custom 1920x1080@75Hz position 0,0
 output $laptop resolution 1920x1080 position 1920,0
 
 # Disable laptop's display while it's lid is closed
@@ -257,3 +257,10 @@ bindswitch --reload --locked lid:off output $laptop enable
 # Set shortcuts to move workspaces around
 bindsym --to-code $mod+Shift+Left move workspace to output HDMI-A-1
 bindsym --to-code $mod+Shift+Right move workspace to output $laptop
+
+focus_follows_mouse no
+
+gaps inner 10
+gaps outer -10
+
+hide_edge_borders smart
